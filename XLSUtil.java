@@ -1,10 +1,15 @@
 package util;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
@@ -13,6 +18,40 @@ import java.util.Date;
  * @author Jonatan Raimir
  */
 public final class XLSUtil {
+    private String pathFileModel;
+    private FileInputStream fileInputStream;
+    private HSSFWorkbook workbook;
+    private HSSFSheet worksheet;
+
+
+    public void openFileXLS(String pathFile, int sheetAt) throws IOException {
+        __openFileXLS(pathFile);
+        this.worksheet = workbook.getSheetAt(sheetAt); //Access the worksheet, so that we can update / modify it.
+    }
+
+    public void openFileXLS(String pathFile, String nameSheet) throws IOException {
+        __openFileXLS(pathFile);
+        this.worksheet = workbook.getSheet(nameSheet); //Access the worksheet, so that we can update / modify it.
+    }
+
+    private void __openFileXLS(String pathFile) throws IOException {
+        this.pathFileModel = pathFile;
+        this.fileInputStream = new FileInputStream(new File(pathFile));
+        this.workbook = new HSSFWorkbook(fileInputStream); //Access the workbook
+    }
+
+    public void closeFile() throws IOException {
+        getFileInputStream().close();
+    }
+
+    public static String createTemporaryCopyFile(HSSFWorkbook workbook) throws IOException {
+        String pathNewTemporaryFile = FileUtils.getTempDirectoryPath() + "newFileTemporary.xls";
+        FileOutputStream outputFile = new FileOutputStream(new File(pathNewTemporaryFile));  //Open FileOutputStream to write updates
+        workbook.write(outputFile); //write changes
+        outputFile.close();  //close the stream
+        return pathNewTemporaryFile;
+    }
+
     /**
      * Sets a value to a specific xls cell.
      * @param worksheet Chosen worksheet.
@@ -184,5 +223,21 @@ public final class XLSUtil {
         }
 
         return cell;
+    }
+
+    public String getPathFileModel() {
+        return pathFileModel;
+    }
+
+    public HSSFWorkbook getWorkbook() {
+        return workbook;
+    }
+
+    public HSSFSheet getWorksheet() {
+        return worksheet;
+    }
+
+    public FileInputStream getFileInputStream() {
+        return fileInputStream;
     }
 }
