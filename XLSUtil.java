@@ -2,6 +2,7 @@ package util;
 
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 import java.math.BigDecimal;
@@ -21,6 +22,11 @@ public final class XLSUtil {
      */
     public static void setCellXY(HSSFSheet worksheet, int line, int col, LocalDate value) {
         Cell cell = worksheet.getRow( (line - 1) ).getCell( (col - 1) );   // Access the second cell in second row to update the value
+
+        if (cell == null) {
+            cell = createCell(worksheet, line, col);
+        }
+
         Date date = java.sql.Date.valueOf(value);
         cell.setCellValue(date);  // Get current cell value value and overwrite the value
     }
@@ -58,6 +64,11 @@ public final class XLSUtil {
      */
     public static void setCellXY(HSSFSheet worksheet, int line, int col, double value) {
         Cell cell = worksheet.getRow( (line - 1) ).getCell( (col - 1) );   // Access the second cell in second row to update the value
+
+        if (cell == null) {
+            cell = createCell(worksheet, line, col);
+        }
+
         cell.setCellValue(value);  // Get current cell value value and overwrite the value
     }
 
@@ -70,6 +81,11 @@ public final class XLSUtil {
      */
     public static void setCellXY(HSSFSheet worksheet, int line, int col, String value) {
         Cell cell = worksheet.getRow( (line - 1) ).getCell( (col - 1) );   // Access the second cell in second row to update the value
+
+        if (cell == null) {
+            cell = createCell(worksheet, line, col);
+        }
+
         cell.setCellValue(value);  // Get current cell value value and overwrite the value
     }
 
@@ -160,5 +176,10 @@ public final class XLSUtil {
                 worksheet.addMergedRegion(newCellRangeAddress);
             }
         }
+    }
+
+    public static Cell createCell(HSSFSheet worksheet, int line, int col) {
+        Row row = worksheet.getRow(line);
+        return row.createCell(col);
     }
 }
