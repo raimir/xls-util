@@ -1,0 +1,21 @@
+/*
+    private <T> void setCellByLine(HSSFSheet worksheet, int col, int startLine, int endLine, List<T> arr) {
+        int count = 0;
+        for(int line = (startLine - 1); line < endLine; line++) {
+            Cell cell = worksheet.getRow(line).getCell( (col -1) );   // Access the second cell in second row to update the value
+            //cell.setCellValue(arr[count]);  // Get current cell value value and overwrite the value
+            cell.setCellValue("OverRide Last Name");  // Get current cell value value and overwrite the value
+            ++count;
+        }
+    }
+
+    private void setCellByCol(HSSFSheet worksheet, int line, int startCol, int endCol, String[] arr) {
+        int count = 0;
+        for(int col = (startCol - 1); col < endCol; col++) {
+            Cell cell = worksheet.getRow( (line - 1) ).getCell(col);   // Access the second cell in second row to update the value
+            //cell.setCellValue(arr[count]);  // Get current cell value value and overwrite the value
+            cell.setCellValue("OverRide Last Name");  // Get current cell value value and overwrite the value
+            ++count;
+        }
+    }
+    */
