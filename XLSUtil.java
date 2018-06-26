@@ -6,10 +6,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
@@ -23,6 +20,18 @@ public final class XLSUtil {
     private HSSFWorkbook workbook;
     private HSSFSheet worksheet;
 
+
+    public void openFileXLS(File file, int sheetAt) throws IOException {
+        this.fileInputStream = new FileInputStream(file);
+        this.workbook = new HSSFWorkbook(fileInputStream); //Access the workbook
+        this.worksheet = workbook.getSheetAt(sheetAt); //Access the worksheet, so that we can update / modify it.
+    }
+
+    public void openFileXLS(File file, String nameSheet) throws IOException {
+        this.fileInputStream = new FileInputStream(file);
+        this.workbook = new HSSFWorkbook(fileInputStream); //Access the workbook
+        this.worksheet = workbook.getSheet(nameSheet); //Access the worksheet, so that we can update / modify it.
+    }
 
     public void openFileXLS(String pathFile, int sheetAt) throws IOException {
         __openFileXLS(pathFile);
