@@ -8,13 +8,16 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
+/**
+ * @author Jonatan Raimir
+ */
 public final class XLSUtil {
     /**
-     *
-     * @param worksheet
-     * @param line
-     * @param col
-     * @param value
+     * Sets a value to a specific xls cell.
+     * @param worksheet Chosen worksheet.
+     * @param line The cell line.
+     * @param col The cell column.
+     * @param value The value to be bind.
      */
     public static void setCellXY(HSSFSheet worksheet, int line, int col, LocalDate value) {
         Cell cell = worksheet.getRow( (line - 1) ).getCell( (col - 1) );   // Access the second cell in second row to update the value
@@ -23,11 +26,11 @@ public final class XLSUtil {
     }
 
     /**
-     *
-     * @param worksheet
-     * @param line
-     * @param col
-     * @param value
+     * Sets a value to a specific xls cell.
+     * @param worksheet Chosen worksheet.
+     * @param line The cell line.
+     * @param col The cell column.
+     * @param value The value to be bind.
      */
     public static void setCellXY(HSSFSheet worksheet, int line, int col, Integer value) {
         double val = value.doubleValue();
@@ -35,11 +38,11 @@ public final class XLSUtil {
     }
 
     /**
-     *
-     * @param worksheet
-     * @param line
-     * @param col
-     * @param value
+     * Sets a value to a specific xls cell.
+     * @param worksheet Chosen worksheet.
+     * @param line The cell line.
+     * @param col The cell column.
+     * @param value The value to be bind.
      */
     public static void setCellXY(HSSFSheet worksheet, int line, int col, BigDecimal value) {
         double val = value.doubleValue();
@@ -47,11 +50,11 @@ public final class XLSUtil {
     }
 
     /**
-     *
-     * @param worksheet
-     * @param line
-     * @param col
-     * @param value
+     * Sets a value to a specific xls cell.
+     * @param worksheet Chosen worksheet.
+     * @param line The cell line.
+     * @param col The cell column.
+     * @param value The value to be bind.
      */
     public static void setCellXY(HSSFSheet worksheet, int line, int col, double value) {
         Cell cell = worksheet.getRow( (line - 1) ).getCell( (col - 1) );   // Access the second cell in second row to update the value
@@ -59,11 +62,11 @@ public final class XLSUtil {
     }
 
     /**
-     *
-     * @param worksheet
-     * @param line
-     * @param col
-     * @param value
+     * Sets a value to a specific xls cell.
+     * @param worksheet Chosen worksheet.
+     * @param line The cell line.
+     * @param col The cell column.
+     * @param value The value to be bind.
      */
     public static void setCellXY(HSSFSheet worksheet, int line, int col, String value) {
         Cell cell = worksheet.getRow( (line - 1) ).getCell( (col - 1) );   // Access the second cell in second row to update the value
@@ -71,9 +74,8 @@ public final class XLSUtil {
     }
 
     /**
-     * Este método foi copiado do site
-     * http://www.zachhunter.com/2010/05/npoi-copy-row-helper/
-     *
+     * This method copies a line with its formatting.
+     * Was taken from @link{http://www.zachhunter.com/2010/05/npoi-copy-row-helper/}.
      * @param workbook
      * @param worksheet
      * @param sourceRowNum
