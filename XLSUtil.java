@@ -171,6 +171,11 @@ public final class XLSUtil {
      */
     public static Cell createCell(HSSFSheet worksheet, int line, int col) {
         Row row = worksheet.getRow( --line );
+
+        if (row == null) {
+            row = worksheet.createRow( --line );
+        }
+
         Cell cell = row.getCell( --col );
 
         //isNull
