@@ -21,13 +21,8 @@ public final class XLSUtil {
      * @param value The value to be bind.
      */
     public static void setCellXY(HSSFSheet worksheet, int line, int col, LocalDate value) {
-        Cell cell = worksheet.getRow( (line - 1) ).getCell( (col - 1) );   // Access the second cell in second row to update the value
-
-        if (cell == null) {
-            cell = createCell(worksheet, line, col);
-        }
-
         Date date = java.sql.Date.valueOf(value);
+        Cell cell = createCell(worksheet, line, col);
         cell.setCellValue(date);  // Get current cell value value and overwrite the value
     }
 
@@ -63,12 +58,7 @@ public final class XLSUtil {
      * @param value The value to be bind.
      */
     public static void setCellXY(HSSFSheet worksheet, int line, int col, double value) {
-        Cell cell = worksheet.getRow( (line - 1) ).getCell( (col - 1) );   // Access the second cell in second row to update the value
-
-        if (cell == null) {
-            cell = createCell(worksheet, line, col);
-        }
-
+        Cell cell = createCell(worksheet, line, col);
         cell.setCellValue(value);  // Get current cell value value and overwrite the value
     }
 
@@ -80,12 +70,7 @@ public final class XLSUtil {
      * @param value The value to be bind.
      */
     public static void setCellXY(HSSFSheet worksheet, int line, int col, String value) {
-        Cell cell = worksheet.getRow( (line - 1) ).getCell( (col - 1) );   // Access the second cell in second row to update the value
-
-        if (cell == null) {
-            cell = createCell(worksheet, line, col);
-        }
-
+        Cell cell = createCell(worksheet, line, col);
         cell.setCellValue(value);  // Get current cell value value and overwrite the value
     }
 
@@ -179,7 +164,14 @@ public final class XLSUtil {
     }
 
     public static Cell createCell(HSSFSheet worksheet, int line, int col) {
-        Row row = worksheet.getRow(line);
-        return row.createCell(col);
+        Row row = worksheet.getRow( --line );
+        Cell cell = row.getCell( --col );
+
+        //isNull
+        if (cell == null) {
+            cell = row.createCell(col);
+        }
+
+        return cell;
     }
 }
