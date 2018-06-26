@@ -163,6 +163,12 @@ public final class XLSUtil {
         }
     }
 
+    /**
+     * create a cell in x,y coordinates
+     * @param worksheet Chosen worksheet.
+     * @param line The cell line.
+     * @param col The cell column.
+     */
     public static Cell createCell(HSSFSheet worksheet, int line, int col) {
         Row row = worksheet.getRow( --line );
         Cell cell = row.getCell( --col );
