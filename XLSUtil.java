@@ -69,33 +69,31 @@ public final class XLSUtil {
      * @param value The value to be bind.
      */
     public static void setCellXY(HSSFSheet worksheet, int line, int col, LocalDate value) {
-        Date date = java.sql.Date.valueOf(value);
         Cell cell = createCell(worksheet, line, col);
-        cell.setCellValue(date);  // Get current cell value value and overwrite the value
+        if (value != null) {
+            Date date = java.sql.Date.valueOf(value);
+            cell.setCellValue(date);  // Get current cell value value and overwrite the value
+        }
+        else {
+            cell.setCellValue("");
+        }
     }
 
     /**
-     * Sets a value to a specific xls cell.
+     * Sets a numeric value to a specific xls cell.
      * @param worksheet Chosen worksheet.
      * @param line The cell line.
      * @param col The cell column.
      * @param value The value to be bind.
      */
-    public static void setCellXY(HSSFSheet worksheet, int line, int col, Integer value) {
-        double val = value.doubleValue();
-        setCellXY(worksheet, line, col, val);
-    }
-
-    /**
-     * Sets a value to a specific xls cell.
-     * @param worksheet Chosen worksheet.
-     * @param line The cell line.
-     * @param col The cell column.
-     * @param value The value to be bind.
-     */
-    public static void setCellXY(HSSFSheet worksheet, int line, int col, BigDecimal value) {
-        double val = value.doubleValue();
-        setCellXY(worksheet, line, col, val);
+    public static void setCellXY(HSSFSheet worksheet, int line, int col, Number value) {
+        if (value != null) {
+            double val = value.doubleValue();
+            setCellXY(worksheet, line, col, val);
+        }
+        else {
+            setCellXY(worksheet, line, col, "");
+        }
     }
 
     /**
@@ -119,7 +117,12 @@ public final class XLSUtil {
      */
     public static void setCellXY(HSSFSheet worksheet, int line, int col, String value) {
         Cell cell = createCell(worksheet, line, col);
-        cell.setCellValue(value);  // Get current cell value value and overwrite the value
+        if (value != null) {
+            cell.setCellValue(value);  // Get current cell value value and overwrite the value
+        }
+        else {
+            cell.setCellValue("");
+        }
     }
 
     /**
