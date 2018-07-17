@@ -62,6 +62,15 @@ public final class XLSUtil {
         outputFile.close();  //close the stream
         return pathNewTemporaryFile;
     }
+    
+    /**
+     * deleteFile
+     * @param pathFile
+     */
+    public static void deleteFile(String pathFile) {
+        File file = new File(pathFile);
+        file.delete();
+    }
 
     /**
      * Sets a value to a specific xls cell.
