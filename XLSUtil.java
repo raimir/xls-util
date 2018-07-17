@@ -68,8 +68,14 @@ public final class XLSUtil {
      * @param pathFile
      */
     public static void deleteFile(String pathFile) {
-        File file = new File(pathFile);
-        file.delete();
+       File file = new File(pathFile);
+
+        if (file.delete()) {
+            System.out.println(XLSUtil.class.getName() + " - File deleted successfully");
+        }
+        else {
+            System.out.println(XLSUtil.class.getName() + " - Failed to delete the file");
+        }
     }
 
     /**
