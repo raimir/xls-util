@@ -8,6 +8,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -54,7 +55,8 @@ public final class XLSUtil {
     }
 
     public static String createTemporaryCopyFile(HSSFWorkbook workbook) throws IOException {
-        String pathNewTemporaryFile = FileUtils.getTempDirectoryPath() + "newFileTemporary.xls";
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        String pathNewTemporaryFile =  FileUtils.getTempDirectoryPath() + "newFileTemporary_" + timestamp.getTime() + ".xls";
         FileOutputStream outputFile = new FileOutputStream(new File(pathNewTemporaryFile));  //Open FileOutputStream to write updates
         workbook.write(outputFile); //write changes
         outputFile.close();  //close the stream
